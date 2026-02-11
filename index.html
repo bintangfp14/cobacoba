@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Valentine's Day ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .page {
+      display: none;
+      text-align: center;
+      max-width: 900px;
+      padding: 30px;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    .center-img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 25px 0;
+    }
+
+    .grid img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .message {
+      font-size: 1.3em;
+      line-height: 1.6;
+      background: rgba(255,255,255,0.15);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 28px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      background: #fff;
+      color: #ff5f7e;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffe6ec;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HALAMAN 1 -->
+  <div class="page active" id="page1">
+    <h1>Happy Valentine's Day! ❤️</h1>
+    <img src="https://your-link-gambar-utama.jpg" class="center-img" alt="Foto Kita">
+    <br>
+    <button onclick="nextPage(1)">Lanjut ➜</button>
+  </div>
+
+  <!-- HALAMAN 2 -->
+  <div class="page" id="page2">
+    <h1>Kenangan Kita 📸</h1>
+    <div class="grid">
+      <img src="https://foto1.jpg">
+      <img src="https://foto2.jpg">
+      <img src="https://foto3.jpg">
+      <img src="https://foto4.jpg">
+      <img src="https://foto5.jpg">
+      <img src="https://foto6.jpg">
+      <img src="https://foto7.jpg">
+      <img src="https://foto8.jpg">
+      <img src="https://foto9.jpg">
+    </div>
+    <button onclick="nextPage(2)">Lanjut ➜</button>
+  </div>
+
+  <!-- HALAMAN 3 -->
+  <div class="page" id="page3">
+    <h1>Untuk Kamu 🤍</h1>
+    <div class="message">
+      Terima kasih sudah menjadi bagian terindah dalam hidupku.<br><br>
+      Bersamamu, hari-hariku terasa lebih hangat dan berarti.<br><br>
+      Aku bersyukur bisa mencintaimu, hari ini, esok, dan selamanya ❤️
+    </div>
+  </div>
+
+  <script>
+    function nextPage(num) {
+      document.getElementById("page" + num).classList.remove("active");
+      document.getElementById("page" + (num + 1)).classList.add("active");
+    }
+  </script>
+
+</body>
+</html>
