@@ -1,130 +1,246 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Valentine's Day ❤️</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
+<meta charset="UTF-8">
+<title>Happy Valentine's Day ❤️</title>
 
-    .page {
-      display: none;
-      text-align: center;
-      max-width: 900px;
-      padding: 30px;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #ffc0cb; /* pink pastel */
+  overflow: hidden;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
-    .page.active {
-      display: block;
-    }
+/* ===== ANIMASI HATI ===== */
+.heart {
+  position: fixed;
+  width: 15px;
+  height: 15px;
+  background: red;
+  transform: rotate(45deg);
+  animation: float 10s linear infinite;
+}
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: red;
+  border-radius: 50%;
+}
 
-    .center-img {
-      width: 280px;
-      height: 280px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      margin-bottom: 30px;
-    }
+.heart::before { top: -7px; left: 0; }
+.heart::after { left: -7px; top: 0; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 25px 0;
-    }
+@keyframes float {
+  0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
+}
 
-    .grid img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 15px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    }
+/* ===== CONFETTI ===== */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: yellow;
+  top: -10px;
+  animation: fall 3s linear forwards;
+}
 
-    .message {
-      font-size: 1.3em;
-      line-height: 1.6;
-      background: rgba(255,255,255,0.15);
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
+@keyframes fall {
+  to { transform: translateY(100vh) rotate(360deg); }
+}
 
-    button {
-      margin-top: 30px;
-      padding: 12px 28px;
-      font-size: 1.1em;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      background: #fff;
-      color: #ff5f7e;
-      transition: 0.3s;
-    }
+/* ===== PAGE STYLE ===== */
+.page {
+  display: none;
+  text-align: center;
+  padding: 20px;
+  z-index: 2;
+}
 
-    button:hover {
-      background: #ffe6ec;
-      transform: scale(1.05);
-    }
-  </style>
+.page.active { display: block; }
+
+h1 { font-size: 3em; }
+
+button {
+  margin-top: 20px;
+  padding: 10px 25px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: white;
+  color: #ff5f9e;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.center-img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.grid img:hover {
+  transform: rotate(-5deg) scale(1.05);
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 20px;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- HALAMAN 1 -->
-  <div class="page active" id="page1">
-    <h1>Happy Valentine's Day! ❤️</h1>
-    <img src="https://your-link-gambar-utama.jpg" class="center-img" alt="Foto Kita">
-    <br>
-    <button onclick="nextPage(1)">Lanjut ➜</button>
+<!-- PAGE 0 -->
+<div class="page active" id="page0">
+  <h1>Will you be my Valentine? 💖</h1>
+  <div class="btn-group">
+    <button onclick="nextPage(0)">YES 💘</button>
+    <button id="noBtn">NO 😆</button>
   </div>
+</div>
 
-  <!-- HALAMAN 2 -->
-  <div class="page" id="page2">
-    <h1>Kenangan Kita 📸</h1>
-    <div class="grid">
-      <img src="https://foto1.jpg">
-      <img src="https://foto2.jpg">
-      <img src="https://foto3.jpg">
-      <img src="https://foto4.jpg">
-      <img src="https://foto5.jpg">
-      <img src="https://foto6.jpg">
-      <img src="https://foto7.jpg">
-      <img src="https://foto8.jpg">
-      <img src="https://foto9.jpg">
-    </div>
-    <button onclick="nextPage(2)">Lanjut ➜</button>
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+  <h1>YEAY!!! 🎉</h1>
+  <button onclick="nextPage(1)">Lanjut ➜</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <h1>Happy Valentine's Day! &lt;3</h1>
+  <img src="https://your-link-gambar.jpg" class="center-img">
+  <br>
+  <button onclick="nextPage(2)">Lanjut ➜</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <h1>Kenangan Kita 📸</h1>
+  <div class="grid">
+    <img src="https://foto1.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto2.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto3.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto4.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto5.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto6.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto7.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto8.jpg" onclick="openLightbox(this.src)">
+    <img src="https://foto9.jpg" onclick="openLightbox(this.src)">
   </div>
+  <button onclick="nextPage(3)">Lanjut ➜</button>
+</div>
 
-  <!-- HALAMAN 3 -->
-  <div class="page" id="page3">
-    <h1>Untuk Kamu 🤍</h1>
-    <div class="message">
-      Terima kasih sudah menjadi bagian terindah dalam hidupku.<br><br>
-      Bersamamu, hari-hariku terasa lebih hangat dan berarti.<br><br>
-      Aku bersyukur bisa mencintaimu, hari ini, esok, dan selamanya ❤️
-    </div>
-  </div>
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+  <h1>Untuk Kamu 🤍</h1>
+  <p>
+    Terima kasih sudah menjadi bagian terindah dalam hidupku ❤️<br><br>
+    Aku bersyukur memilikimu hari ini dan seterusnya.
+  </p>
+</div>
 
-  <script>
-    function nextPage(num) {
-      document.getElementById("page" + num).classList.remove("active");
-      document.getElementById("page" + (num + 1)).classList.add("active");
-    }
-  </script>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function nextPage(n){
+  document.getElementById("page"+n).classList.remove("active");
+  document.getElementById("page"+(n+1)).classList.add("active");
+
+  // Aktifkan confetti hanya di halaman YEAY
+  if(n === 0){
+    startConfetti();
+  }
+}
+
+/* NO BUTTON KABUR */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", ()=>{
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*window.innerWidth+"px";
+  noBtn.style.top=Math.random()*window.innerHeight+"px";
+});
+
+/* LIGHTBOX */
+function openLightbox(src){
+  document.getElementById("lightbox").style.display="flex";
+  document.getElementById("lightbox-img").src=src;
+}
+function closeLightbox(){
+  document.getElementById("lightbox").style.display="none";
+}
+
+/* GENERATE HATI */
+for(let i=0;i<30;i++){
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(5+Math.random()*5)+"s";
+  heart.style.background="hsl("+Math.random()*360+",70%,60%)";
+  document.body.appendChild(heart);
+}
+
+/* CONFETTI */
+function startConfetti(){
+  for(let i=0;i<100;i++){
+    let conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.background="hsl("+Math.random()*360+",70%,60%)";
+    conf.style.animationDuration=(2+Math.random()*2)+"s";
+    document.body.appendChild(conf);
+
+    setTimeout(()=>conf.remove(),4000);
+  }
+}
+</script>
 
 </body>
 </html>
